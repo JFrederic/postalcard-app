@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Chosis ta carte</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img id="image" style="width:100%;height:100%;" src="{{asset('images/carte-anniversaire.jpg')}}" alt="image_carte"/>
+            </div>
+            <div class="col-md-6">
+                <div class="well well-sm">
+                  {{form_start(form)}}
+                    <form class="form-horizontal" action="" method="post">
+                        <fieldset>
+                            <legend class="text-center">Envoyer cette carte</legend>
+                            <!-- Select input -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="name">{{ form_label(form.type) }}</label>
+                                <div class="col-md-9">
+                                  {{form_widget(form.type , {'attr': {'class':'form-control'} })}}
+                                </div>
+                            </div>
+                            <!-- Name input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="name">{{ form_label(form.destinataire) }}</label>
+                                <div class="col-md-9">
+                                  {{form_widget(form.destinataire , {'attr': {'class':'form-control'} })}}
+                                </div>
+                            </div>
+
+
+
+                            <!-- Email input-->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="email">{{ form_label(form.sujet) }}</label>
+                                <div class="col-md-9">
+                                  {{form_widget(form.sujet , {'attr': {'class':'form-control'} })}}
+                                </div>
+                            </div>
+
+                            <!-- Message body -->
+                            <div class="form-group">
+                                <label class="col-md-3 control-label" for="message">{{ form_label(form.message) }}</label>
+                                <div class="col-md-9">
+                                  {{form_widget(form.message , {'attr': {'class':'form-control' , 'rows': '5'} })}}
+                                </div>
+                            </div>
+
+                            <!-- Form actions -->
+                            <div class="form-group">
+                                <div class="col-md-12 text-right">
+                                    <input type="submit" class="btn btn-primary btn-lg" value="Create">
+                                </div>
+                            </div>
+                        </fieldset>
+                        {{form_end(form)}}
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <ul>
+            <li>
+                <a href="{{ path('carte_index') }}" class="btn btn-md btn-danger">Back to the list</a>
+            </li>
+        </ul>
+    </div>
+
+    {% block javascript %}
+
+        <script src="{{ asset('main/js/jquery-1.9.1.min.js') }}"></script>
+        <script>
+
+            $("#appbundle_carte_type").change(function() {
+                var currentVal = $("#appbundle_carte_type").val();
+                if (currentVal == 'Carte Anniversaire') {
+                    $("#image").attr("src", "{{asset('images/carte-anniversaire.jpg')}}");
+                } else if (currentVal == 'Carte Noël') {
+                    $("#image").attr("src", "{{asset('images/noel2007.jpg')}}");
+                } else if (currentVal == 'Carte Nouvel An') {
+                    $("#image").attr("src", "{{asset('images/happy_new_year.jpg')}}");
+                }
+            });
+        </script>
+
+    {% endblock %}
+{% endblock %}
